@@ -1,10 +1,10 @@
 name: astrbot_plugin_qqadmin
 display_name: QQ群管
 desc: "[仅aiocqhttp]群管插件，功能包括：禁言、全体禁言、踢人、拉黑、改群昵称、改头衔、设管理员、设精华、撤回消息、改群头像、改群名、发群公告、整理群友信息等等"
-help: 略
-version: v3.4.1
-author: Zhalslar
-repo: https://github.com/Zhalslar/astrbot_plugin_qqadmin
+help: 发送 /菜单 或 /群管帮助 查看图片菜单，支持基础、防护、入群、资料分类。
+version: v3.4.2
+author: Zhalslar / kittyyyds
+repo: https://github.com/kittyyyds/astrbot_plugin_qqadmin
 support_platforms:
   - aiocqhttp
 astrbot_version: ">=4.24.2"

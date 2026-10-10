@@ -22,6 +22,7 @@ from .core import (
 )
 from .data import QQAdminDB
 from .group_info_cache import QQGroupInfoCache
+from .menu import get_menu_page, menu_image_path, menu_text
 from .permission import (
     PermLevel,
     perm_manager,
@@ -64,6 +65,23 @@ class QQAdminPlugin(Star):
         """平台加载完成时"""
         if not self.curfew.curfew_managers:
             asyncio.create_task(self.curfew.initialize())
+
+    @filter.command("群管帮助", alias={"菜单", "群管菜单"})
+    async def show_menu(self, event: AiocqhttpMessageEvent, category: str = ""):
+        """菜单 [基础/防护/入群/资料]，查看 Kitty 群管图片菜单。"""
+        page = get_menu_page(category)
+        if page is None:
+            yield event.plain_result(
+                "分类不存在。发送 /菜单 查看首页，或发送 /菜单 基础、"
+                "/菜单 防护、/菜单 入群、/菜单 资料。"
+            )
+        else:
+            image = menu_image_path(page)
+            if image.is_file():
+                yield event.image_result(str(image))
+            else:
+                yield event.plain_result(menu_text(page))
+        event.stop_event()
 
     @filter.command("群管配置", alias={"群管设置"})
     @perm_required(PermLevel.MEMBER, check_at=False)
