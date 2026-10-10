@@ -10,7 +10,7 @@ MENU_SECTIONS = {
             ("全禁", "全禁 开/关", "开启或关闭全员禁言"),
             ("踢了", "踢了 @成员", "将指定成员移出群聊"),
             ("群拉黑", "群拉黑 @成员", "移出群聊，并加入进群黑名单"),
-            ("撤回", "撤回 @成员 <数量>", "也可引用一条消息后发送 /撤回"),
+            ("撤回", "撤回 @成员 <数量>", "也可引用一条消息后发送 撤回"),
             ("上管", "上管 @成员", "设为管理员，需要机器人是群主"),
             ("下管", "下管 @成员", "取消管理员，需要机器人是群主"),
             ("投票禁言", "投票禁言 <秒数> @成员", "发起一次禁言投票"),
@@ -119,9 +119,10 @@ def menu_text(page: str) -> str:
     for section in sections:
         lines.extend(["", section["title"]])
         if page == "home":
-            lines.extend(f"/{syntax} - {description}" for syntax, description in section["featured"])
-            lines.append(f"完整用法：/菜单 {section['keyword']}")
+            lines.extend(f"{syntax} - {description}" for syntax, description in section["featured"])
+            lines.append(f"完整用法：菜单 {section['keyword']}")
         else:
-            lines.extend(f"/{syntax} - {description}" for _, syntax, description in section["commands"])
+            lines.extend(f"{syntax} - {description}" for _, syntax, description in section["commands"])
     lines.append("\n管理操作需要相应群权限，权限以本群配置为准。")
+    lines.append("群内口令可直接发送，也兼容原唤醒前缀。")
     return "\n".join(lines)

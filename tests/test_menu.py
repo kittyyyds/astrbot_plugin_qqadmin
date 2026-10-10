@@ -37,7 +37,7 @@ class MenuTests(unittest.TestCase):
             self.assertIn("Kitty 群管", menu_text(page))
         for key, section in MENU_SECTIONS.items():
             for _, syntax, _ in section["commands"]:
-                self.assertIn(f"/{syntax}", menu_text(key))
+                self.assertIn(syntax, menu_text(key))
 
 
 if __name__ == "__main__":

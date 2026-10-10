@@ -53,7 +53,7 @@ class Renderer:
     def footer(self, draw, y):
         draw.line((56, y, 944, y), fill=LINE, width=2)
         self.text(draw, (56, y + 22), "管理操作需要相应群权限，权限以本群配置为准", 24, MUTED)
-        self.text(draw, (56, y + 62), "菜单首页  /菜单       完整帮助  /群管帮助", 26, GREEN, True)
+        self.text(draw, (56, y + 62), "菜单首页  菜单       完整帮助  群管帮助", 26, GREEN, True)
 
     def home(self):
         image, draw = self.canvas(1510)
@@ -67,14 +67,14 @@ class Renderer:
             draw.line((x, y + 52, x + 422, y + 52), fill=color, width=3)
             for row, (syntax, description) in enumerate(section["featured"]):
                 top = y + 78 + row * 77
-                self.text(draw, (x, top), f"/{syntax}", 30, bold=True, max_width=422)
+                self.text(draw, (x, top), syntax, 30, bold=True, max_width=422)
                 self.text(draw, (x, top + 40), description, 24, MUTED, max_width=422)
         y = 1170
         draw.rectangle((56, y, 944, y + 172), fill="#EDF7F4")
         self.text(draw, (80, y + 16), "分类详情", 26, GREEN, True)
         for index, section in enumerate(MENU_SECTIONS.values()):
             self.text(draw, (80 + index % 2 * 434, y + 65 + index // 2 * 48),
-                      f"/菜单 {section['keyword']}", 29, bold=True)
+                      f"菜单 {section['keyword']}", 29, bold=True)
         self.footer(draw, 1380)
         return image
 
@@ -82,11 +82,11 @@ class Renderer:
         section = MENU_SECTIONS[key]
         height = 302 + len(section["commands"]) * 112 + 154
         image, draw = self.canvas(height)
-        self.header(draw, section["title"], f"Kitty 群管  /  /菜单 {section['keyword']}", f"0{index}")
+        self.header(draw, section["title"], f"Kitty 群管  /  菜单 {section['keyword']}", f"0{index}")
         for row, (_, syntax, description) in enumerate(section["commands"]):
             y = 280 + row * 112
             draw.rectangle((56, y + 10, 62, y + 44), fill=section["color"])
-            self.text(draw, (80, y), f"/{syntax}", 34, bold=True, max_width=856)
+            self.text(draw, (80, y), syntax, 34, bold=True, max_width=856)
             self.text(draw, (80, y + 51), description, 25, MUTED, max_width=856)
             draw.line((80, y + 98, 944, y + 98), fill=LINE, width=1)
         self.footer(draw, height - 125)
